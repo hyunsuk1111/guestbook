@@ -53,4 +53,16 @@ public class GuestbookController {
         return "redirect:/guestbook/list";
     }
 
+    @GetMapping("/read")
+    public void read(Long gno, Model model){
+
+        log.info("gno : " + gno);
+
+        GuestbookDTO dto = service.read(gno);
+
+        log.info("data" + dto);
+
+        model.addAttribute("result", dto);
+    }
+
 }
