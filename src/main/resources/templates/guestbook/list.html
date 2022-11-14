@@ -16,14 +16,14 @@
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Writer</th>
-                <th scope="col">Regdate</th>
+                <th scope="col">RegDate</th>
             </tr>
             </thead>
 
             <tbody>
                 <tr th:each="dto : ${result.dtoList}">
                     <th scope="row">
-                        <a th:href="@{/guestbook/read(gno=${dto.gno},page=${result.page})}">
+                        <a th:href="@{/guestbook/read(gno = ${dto.gno},page = ${result.page})}">
                             [[${dto.gno}]]
                         </a>
                     </th>
