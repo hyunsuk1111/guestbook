@@ -22,7 +22,7 @@ public class GuestbookController {
     private final GuestbookService service;
 
     @GetMapping("/")
-    public String index(){
+    public String index() {
 
         return "redirect:/guestbook/list";
     }
@@ -37,7 +37,7 @@ public class GuestbookController {
     }
 
     @GetMapping("/register")
-    public void register(){
+    public void register() {
 
         log.info("register get....");
     }
@@ -54,8 +54,8 @@ public class GuestbookController {
         return "redirect:/guestbook/list";
     }
 
-    @GetMapping("/read")
-    public void read(Long gno, Model model,@ModelAttribute("requestDTO") PageRequestDTO requestDTO){
+    @GetMapping({"/read", "modify"})
+    public void read(Long gno, Model model, @ModelAttribute("requestDTO") PageRequestDTO requestDTO) {
 
         log.info("gno : " + gno);
 
@@ -64,6 +64,19 @@ public class GuestbookController {
         log.info("data" + dto);
 
         model.addAttribute("dto", dto);
+
     }
 
+    @PostMapping("/remove")
+    public String remove(Long gno, RedirectAttributes redirectAttributes){
+
+        log.info("gno : " + gno);
+
+        service.remove(gno);
+
+        redirectAttributes.addFlashAttribute("msg", gno);
+
+        return "redirect:/guestbook/list";
+
+    }
 }
